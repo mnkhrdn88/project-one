@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import { Player } from "./db/schemas/Player.js";
 
 dotenv.config();
 
@@ -17,6 +18,12 @@ mongoose
   });
 
 const app = express();
+
+app.post("/", async (req, res) => {
+  await Player.create({ firstName: "BAT", lastName: "Dorj", age: 16 });
+
+  res.send("success");
+});
 
 app.listen(port, () => {
   console.log(`app running on ${port}`);
